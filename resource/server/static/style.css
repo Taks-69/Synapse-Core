@@ -1,0 +1,191 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; 
+}
+
+button:hover {
+    transform: scale(1.05); 
+}
+
+/* Light theme */
+body[data-theme="light"] {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body[data-theme="light"] button {
+    background-color: #007bff;
+    color: white;
+}
+
+body[data-theme="light"] button:hover {
+    background-color: #0056b3;
+}
+
+/* Dark theme */
+body[data-theme="dark"] {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+body[data-theme="dark"] button {
+    background-color: #444;
+    color: white;
+}
+
+body[data-theme="dark"] button:hover {
+    background-color: #666;
+}
+
+/* Container for controls */
+.controls {
+    display: flex; 
+    justify-content: space-between; 
+    margin-top: 20px; 
+}
+
+.left-panel, .right-panel {
+    width: 48%; 
+}
+
+/* Screenshot container background for light theme */
+body[data-theme="light"] .screenshot-container {
+    background-color: #007bff; 
+}
+
+/* Screenshot container background for dark theme */
+body[data-theme="dark"] .screenshot-container {
+    background-color: #444; 
+}
+
+/* Screenshot container hover effect for light theme */
+body[data-theme="light"] .screenshot-container:hover {
+    background-color: #0056b3; 
+}
+
+/* Screenshot container hover effect for dark theme */
+body[data-theme="dark"] .screenshot-container:hover {
+    background-color: #666; 
+}
+
+/* Console output background for light theme */
+body[data-theme="light"] .console-output {
+    background-color: #245386; 
+}
+
+/* Console output background for dark theme */
+body[data-theme="dark"] .console-output {
+    background-color: #444; 
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    position: fixed; 
+    top: 20px; 
+    right: 20px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Screenshot image container */
+.screenshot-container {
+    display: inline-block;
+    padding: 10px;
+    background-color: #007bff;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.screenshot-container:hover {
+    transform: scale(1.05);
+}
+
+/* Screenshot image style */
+#screenshotImage {
+    max-width: 300px;
+    border-radius: 5px;
+    transition: max-width 0.3s ease, max-height 0.3s ease;
+}
+
+/* Fullscreen image enlargement */
+.screenshot-container.fullscreen #screenshotImage {
+    max-width: 100%;
+    max-height: 100vh;
+}
+
+.console-output {
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    max-height: 350px;
+    max-width: 100%;
+    height: auto;
+    overflow-y: auto;
+    font-family: monospace;
+    margin: 20px auto;
+}
+
+.console-output.expanded {
+    height: auto;
+}
+
+/* Input field style */
+#commandInput {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+    font-size: 16px;
+}
+
+/* Light theme input field */
+body[data-theme="light"] #commandInput {
+    border-color: #007bff;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Dark theme input field */
+body[data-theme="dark"] #commandInput {
+    border-color: #444444;
+    background-color: #444;
+    color: #ffffff;
+}
+
+/* Input field hover effect */
+#commandInput:hover {
+    border-color: #0056b3;
+}
+
+/* Input field focus effect */
+#commandInput:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}

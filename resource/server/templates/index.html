@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PC Control</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function toggleTheme() {
+            const currentTheme = document.body.dataset.theme;
+            document.body.dataset.theme = currentTheme === 'dark' ? 'light' : 'dark';
+        }
+
+        function confirmAction(command) {
+            const confirmation = confirm(`Are you sure you want to ${command} your PC?`);
+            if (confirmation) {
+                location.href = `/action/${command}`;
+            }
+        }
+
+        function setVolume(value) {
+            fetch('/set_volume', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `volume=${value}`
+            });
+        }
+
+        function takeScreenshot() {
+            fetch('/screenshot')
+                .then(response => response.json())
+                .then(data => {
+                    const imgElement = document.getElementById('screenshotImage');
+                    imgElement.src = 'data:image/png;base64,' + data.image;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function toggleFullscreen() {
+            const container = document.querySelector('.screenshot-container');
+            container.classList.toggle('fullscreen');
+
+            if (container.classList.contains('fullscreen')) {
+                container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('commandForm');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const command = document.getElementById('commandInput').value;
+                fetch('/run_command', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `command=${encodeURIComponent(command)}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    addCommandOutput(data.output);
+                    document.getElementById('commandInput').value = '';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+
+        function addCommandOutput(text) {
+            const commandOutput = document.getElementById('commandOutput');
+            const consoleOutput = document.querySelector('.console-output');
+
+            commandOutput.textContent += text + '\n';
+
+            if (commandOutput.textContent.trim() !== '') {
+                consoleOutput.classList.add('expanded');
+            }
+
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+    </script>
+</head>
+<body data-theme="light">
+    <h1>Controlling your PC</h1>
+    <div class="controls">
+        <div class="left-panel">
+            <button onclick="confirmAction('shutdown')">Shutdown</button>
+            <button onclick="confirmAction('restart')">Restart</button>
+            <button onclick="confirmAction('logoff')">Logoff</button>
+            <button onclick="confirmAction('lock')">Lock</button>
+
+            <h2>Volume Control</h2>
+            <input type="range" min="0" max="1" step="0.1" onchange="setVolume(this.value)" />
+
+            <h2>Screenshot</h2>
+            <button onclick="takeScreenshot()">Take a Screenshot</button><br>
+            <div class="screenshot-container" onclick="toggleFullscreen()">
+                <img id="screenshotImage" src="" alt="Screenshot will appear here" />
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <h2>BAT/Terminal Commands</h2>
+            <form id="commandForm" method="POST" action="/run_command">
+                <input type="text" id="commandInput" name="command" placeholder="Enter a command" required>
+                <button type="submit">Execute</button>
+                
+                <h3>Command Output:</h3>
+                <div class="console-output">
+                    <pre id="commandOutput"></pre>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <button class="theme-toggle" onclick="toggleTheme()">Change Theme</button>
+</body>
+</html>

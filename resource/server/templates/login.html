@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function toggleTheme() {
+            const currentTheme = document.body.dataset.theme;
+            document.body.dataset.theme = currentTheme === 'dark' ? 'light' : 'dark';
+        }
+    </script>
+</head>
+<body data-theme="light">
+    <h1>Login</h1>
+    <form method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+    <button class="theme-toggle" onclick="toggleTheme()">Changer de thème</button>
+</body>
+</html>

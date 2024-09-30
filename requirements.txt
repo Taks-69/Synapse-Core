@@ -1,0 +1,7 @@
+Flask==2.3.3
+Flask-Session==0.4.0
+pycaw==20220320.1
+Pillow==10.0.0
+comtypes==1.1.7
+pystray
+Pillow
