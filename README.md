@@ -7,7 +7,7 @@
 - **Customizable UI**: Switch between light and dark themes for optimal experience.
 
 ## Installation
-1. Clone the repository: `git clone <repository-url>`
+1. Clone the repository: `git clone https://github.com/Taks-69/Synapse-Core`
 2. Navigate to the project directory: `cd synapse-core`
 
 ## Usage
