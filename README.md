@@ -11,7 +11,8 @@
 2. Navigate to the project directory: `cd synapse-core`
 
 ## Usage
-- Change to True or False if you want to have a Login system (app.pyw - Line 25)
+- Change to True or False if you want to have a Login system (app.pyw - Line 23)
+- Change the List of allowed commands for the /run_command endpoint (app.pyw - Line 26)
 - Change the username and password (app.pyw - Line 33)
 - Run the application: `python install.py`
 - Access the interface through your web browser.
