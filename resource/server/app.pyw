@@ -23,14 +23,14 @@ Session(app)
 LOGIN_REQUIRED = False
 
 # List of allowed commands for the /run_command endpoint
-ALLOWED_COMMANDS = ['dir', 'ls', 'whoami']
+ALLOWED_COMMANDS = ['dir', 'whoami']
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        if username == 'admin' and password == 'password':
+        if username == 'admin' and password == 'password': # HEREEEE To change the username and password
             session['logged_in'] = True
             flash("Login successful!", "success")
             return redirect(url_for('index'))
