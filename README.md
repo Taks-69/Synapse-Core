@@ -35,3 +35,7 @@ Feel free to submit a pull request or open an issue.
 
 ## License
 This project is licensed under the GNU General Public License v3.0.
+
+---
+
+🔥 **Feel free to star ⭐ the repository if you find this project useful!** 🚀
